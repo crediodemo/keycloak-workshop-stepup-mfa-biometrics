@@ -1,7 +1,7 @@
 # Keycloak Workshop for Step Up with MFA Biometrics Authentication (Passkeys) and Passwordless login with Passkey autofill
 
 This repository contains a PoC implemented with [Keycloak](https://www.keycloak.org/) on demostrating how to apply Step Up for Web Apps and APIs with Biometrics Authentication, in this case, [Passkeys](https://fidoalliance.org/passkeys). It also outlines the process of transitioning to a **passwordless** experience through the use of Passkeys.
-It doesn’t matter whether your current application utilizes authentication via username and password. I will demonstrate how you can also provide Passkey login, offering a remarkably smooth experience through [WebAuth Conditional UI](https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Conditional-UI) or Passkey autofill during the transition to a passwordless login. Additionally, we will explore how we can **gradually** encourage existing users to **register a passkey** during the **sign-in process** 😄.
+It doesn’t matter whether your current application utilizes authentication via username and password. I will demonstrate how you can also provide Passkey login, offering a remarkably smooth experience through [WebAuth Conditional UI](https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Conditional-UI) or Passkey autofill during the transition to a passwordless login.
 
 Based on [FIDO Alliance](https://fidoalliance.org) and W3C standards, Passkeys replace passwords with cryptographic key pairs. Passkeys are: Strong credentials, Safe from server leaks and Safe from phishing.
 
@@ -9,7 +9,6 @@ The PoC also shows how to implement **OAuth 2.0 Step-up Authentication** based o
 
 You will find more details in the following article:
 - https://embesozzi.medium.com/keycloak-workshop-for-step-up-with-mfa-biometrics-authentication-passkeys-b7020ea9ae1b
-
 ## In Short
 
 ### Step-up + MFA with Biometric Authentication (Passkeys)
@@ -32,17 +31,6 @@ When the user taps on the username input, an autofill suggestion dialog appears 
 
 In the workshop, the application named **Bank Loan** portal will utilize this approach to enhance the overall passwordless experience through the use of **Passkeys** with autofill.
 
-### Progressive passkey enrollment during the sign-up or sign-in process
-
-In the latest version of the workshop, we added the feature of allowing the user to decide when they want to register the WebAuthn authenticator with the custom SPI (WebAuthn Authenticator Conditional Enrollment), either during the sign-up or sign-in process.
-
-If the user doesn't have any passkey registered, it will be a common scenario when transitioning from a password-based to a passwordless experience. The sign-in process will ask the user if they want to upgrade to a Passkey to improve the security and UX experience.
-
-Therefore, you will follow the step below:   
-
-<img src="docs/webauthn-registration-conditional.png" width="60%" height="60%">
-
-
 ## Overview Architecture
 
 * Keycloak is responsible for handling the authentication with the standard OpenID Connect.
@@ -62,9 +50,7 @@ Therefore, you will follow the step below:
 
 * Here is the Passkeys Autofill flow :
     <img src="docs/idp-flow-2.png" width="80%" height="80%">
-
-You can see we added the WebAuthn Conditional Enrollment step, which will help by asking the user if they want to move to a passwordless experience with a Passkey. The user will be asked if they don't have any passkey registered.
-
+    
 # How to install?
 ## Prerequisites
 
@@ -123,18 +109,12 @@ The **Bank Loan portal** (Case 3) has the following requirements:
     
 1.2. Complete the user information (step 1):   
      <img src="docs/register.png" width="60%" height="60%">
-
-1.5. Click in Upgrade to Passkey button:
-You can do it during the sign-up or sign-in process.   
-
-<img src="docs/webauthn-registration-conditional.png" width="60%" height="60%">
-
-
-1.4. Register the Passkeys (step 2):  
+     
+1.3. Register the Passkeys (step 2):  
     <img src="docs/register-passkeys-1.png" width="60%" height="60%">
     <img src="docs/register-passkeys-2.png" width="60%" height="60%">
 
-1.5. You will see the Bank Portal Home  
+1.4. You will see the Bank Portal Home  
     <img src="docs/home.png" width="60%" height="60%">
 
 ### Use case 2: Sign in to the Global Bank Portal for Managing Bank Accounts
@@ -181,11 +161,6 @@ You can do it during the sign-up or sign-in process.
 3.3 Verify your identity and the you will see will see the Loan portal home:   
     <img src="docs/loan-web-3.png" width="60%" height="60%">   
     <img src="docs/loan-web-4.png" width="60%" height="60%">
-
-(Optional) If the user doesn't have any passkey registered, it will be a common scenario when transitioning from a password-based to a passwordless experience. The sign-in process will ask the user if they want to upgrade to a passkey.   
-
-<img src="docs/webauthn-registration-conditional.png" width="60%" height="60%">
-
 ### Use case 4: Sign in passwordless default experience on the Bank Loan Portal
 
 Here are additional examples using the OOTB Keycloak Browser Passwordless feature, providing you with a better understanding of the default user experience.
